@@ -36,9 +36,11 @@ Open the local URL printed by Vite in your terminal.
 
 The project is configured to deploy to GitHub Pages at
 https://moodddii.github.io/memory-game/. The workflow in
-`.github/workflows/deploy.yml` builds and publishes the site whenever changes
-are pushed to `main`; it can also be started manually from the Actions tab.
+`.github/workflows/deploy.yml` builds the site and publishes the production
+files to the `gh-pages` branch whenever changes are pushed to `main`; it can
+also be started manually from the Actions tab.
 
-In the repository's **Settings → Pages**, set the build and deployment source
-to **GitHub Actions** if it is not already selected. Deployment status and the
-published URL are available in the repository's **Actions** tab.
+In the repository's **Settings → Pages**, set the source to **Deploy from a
+branch**, then select the `gh-pages` branch and `/(root)` as the folder. After
+the first successful workflow run creates the branch, deployment status and
+the published URL are available in the repository's **Actions** tab.
