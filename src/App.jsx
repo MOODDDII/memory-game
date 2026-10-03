@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { fireConfetti } from './FireConfetti';
 export const App = () => {
   const emojis = [
     "😀", "😀",
@@ -29,9 +29,9 @@ export const App = () => {
   const [isLocked, setIsLocked] = useState(false);
 
   const handleCardClick = (index) => {
-    if(isLocked) return;
-    if(flippedCards.includes(index)) return;
-    if(matchedCards.includes(index)) return;
+    if (isLocked) return;
+    if (flippedCards.includes(index)) return;
+    if (matchedCards.includes(index)) return;
 
     const newFlippedCards = [...flippedCards, index];
     setFlippedCards(newFlippedCards);
@@ -41,14 +41,26 @@ export const App = () => {
       const [firstIndex, secondIndex] = newFlippedCards;
 
       if (cards[firstIndex] === cards[secondIndex]) {
-        setMatchedCards([...matchedCards, firstIndex, secondIndex]);
+        const updatedMatchedCards = [...matchedCards, firstIndex, secondIndex];
+        setMatchedCards(updatedMatchedCards);
+
+        if (updatedMatchedCards.length === cards.length) {
+          fireConfetti();
+        }
       }
+
       setTimeout(() => {
         setFlippedCards([]);
         setIsLocked(false);
       }, 1000);
     }
-  }
+  };
+
+  const checkWin = () => {
+    if (matchedCards.length === cards.length) {
+        fireConfetti();
+    }
+  };
 
   return (
     <main className="App">
